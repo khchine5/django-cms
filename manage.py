@@ -2,12 +2,15 @@
 # -*- coding: utf-8 -*-
 import os
 import sys
+import warnings
 
 import app_manage
 
+from cms.exceptions import DontUsePageAttributeWarning
 from cms.utils.compat import DJANGO_1_9
 
 gettext = lambda s: s
+warnings.filterwarnings('ignore', category=DontUsePageAttributeWarning)
 
 
 def install_auth_user_model(settings, value):
@@ -60,7 +63,6 @@ if __name__ == '__main__':
     ]
 
     INSTALLED_APPS = [
-        'debug_toolbar',
         'django.contrib.auth',
         'django.contrib.contenttypes',
         'django.contrib.sessions',
@@ -81,6 +83,7 @@ if __name__ == '__main__':
     else:
         MIGRATION_MODULES = {
             'auth': None,
+            'admin': None,
             'contenttypes': None,
             'sessions': None,
             'sites': None,
@@ -97,16 +100,16 @@ if __name__ == '__main__':
             'OPTIONS': {
                 'debug': True,
                 'context_processors': [
-                    "django.contrib.auth.context_processors.auth",
+                    'django.contrib.auth.context_processors.auth',
                     'django.contrib.messages.context_processors.messages',
-                    "django.template.context_processors.i18n",
-                    "django.template.context_processors.debug",
-                    "django.template.context_processors.request",
-                    "django.template.context_processors.media",
+                    'django.template.context_processors.i18n',
+                    'django.template.context_processors.debug',
+                    'django.template.context_processors.request',
+                    'django.template.context_processors.media',
                     'django.template.context_processors.csrf',
-                    "cms.context_processors.cms_settings",
-                    "sekizai.context_processors.sekizai",
-                    "django.template.context_processors.static",
+                    'cms.context_processors.cms_settings',
+                    'sekizai.context_processors.sekizai',
+                    'django.template.context_processors.static',
                 ],
                 'loaders': (
                     'django.template.loaders.filesystem.Loader',

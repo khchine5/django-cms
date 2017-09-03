@@ -305,6 +305,7 @@ casper.test.begin('Copy placeholder contents from the structure board', function
         });
 });
 
+
 casper.test.begin('Plugins with parent restriction cannot be pasted ' +
                   'in incorrect parents (paste button)', function (test) {
     casper.start(globals.editUrl)
