@@ -30,4 +30,6 @@ def get_apps():
 
 
 def get_middleware():
-    return getattr(settings, 'MIDDLEWARE', getattr(settings, 'MIDDLEWARE_CLASSES'))
+    if getattr(settings, 'MIDDLEWARE', None) is None:
+        return settings.MIDDLEWARE_CLASSES
+    return settings.MIDDLEWARE
